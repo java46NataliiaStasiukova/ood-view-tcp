@@ -1,4 +1,4 @@
-package telram.view;
+package telran.view;
 import java.io.*;
 public class ConsoleInputOutput implements InputOutput {
 	BufferedReader reader;
