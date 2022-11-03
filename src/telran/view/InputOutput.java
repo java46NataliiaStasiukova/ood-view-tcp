@@ -56,6 +56,11 @@ public interface InputOutput {
 		
 		return readObject(prompt, errorPrompt, Long::parseLong);
 	}
+	
+	default double readDouble(String prompt, String errorPrompt) {
+		
+		return readObject(prompt, errorPrompt, Double::parseDouble);
+	}
 
 	default String readOption(String prompt, String errorPrompt, List<String> options) {
 		return readObject(prompt, errorPrompt, s -> {
@@ -68,8 +73,7 @@ public interface InputOutput {
 	}
 	
 	default LocalDate readDate(String prompt, String errorPrompt) {
-		return readObject(prompt, errorPrompt, s -> 
-		 	LocalDate.parse(s, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		return readObject(prompt, errorPrompt, LocalDate::parse);
 	}
 
 	default LocalDate readDate(String prompt, String errorPrompt, String format) {
@@ -80,11 +84,11 @@ public interface InputOutput {
 	}
 	
 	default String readPredicate(String prompt, String errorPrompt, Predicate<String> predicate) {
-		return readObject(prompt, errorPrompt, e -> {
-			if(!predicate.test(e)) {
-				throw new RuntimeException("" + e);
+		return readObject(prompt, errorPrompt, s -> {
+			if(!predicate.test(s)) {
+				throw new RuntimeException("" + s);
 			}
-			return e;
+			return s;
 		});
 	}
 
