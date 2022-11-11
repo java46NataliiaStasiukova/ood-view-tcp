@@ -20,7 +20,7 @@ static Item[] getCalculatorItems(Calculator calculator) {
 			Item.of("Subtract numbers", CalculatorMenu::subtract),
 			Item.of("Multiply numbers", CalculatorMenu::multiply),
 			Item.of("Divide numbers", CalculatorMenu::divide),
-			Item.exit()
+			//Item.exit()
 			
 		};
 		return res;
