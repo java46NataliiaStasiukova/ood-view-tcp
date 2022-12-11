@@ -9,7 +9,7 @@ public class CalculatorServerAppl {
 	public static void main(String[] args) {
 		try {
 			TcpServer server = new TcpServer(PORT,
-					new CalculatorProtocol(new CalculatorImpl()), 3);
+					new CalculatorProtocol(new CalculatorImpl()), 2);
 			Thread thread = new Thread(server);
 			thread.start();
 			Scanner scanner = new Scanner(System.in);
