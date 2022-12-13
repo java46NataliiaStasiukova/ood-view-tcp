@@ -9,7 +9,8 @@ public class TcpServer implements Runnable {
 	private static final int ACCEPT_TIME_OUT = 100;
 	public ExecutorService executor;
 	volatile boolean isShutdown = false;
-	public static AtomicInteger count = new AtomicInteger(0);
+	public AtomicInteger count = new AtomicInteger(0);
+	public int nThreads;
 	
    private ServerSocket serverSocket;
    private int port;
@@ -17,6 +18,7 @@ public class TcpServer implements Runnable {
    public TcpServer(int port, ApplProtocol protocol, int nThreads) throws Exception{
 	   this.port = port;
 	   this.protocol = protocol;
+	   this.nThreads = nThreads;
 	   executor = Executors.newFixedThreadPool(nThreads);
 	   serverSocket = new ServerSocket(port);
 	   serverSocket.setSoTimeout(ACCEPT_TIME_OUT);
@@ -30,7 +32,7 @@ public class TcpServer implements Runnable {
 		while(!isShutdown) {
 			try {				
 				Socket socket = serverSocket.accept();////
-				count.addAndGet(1);
+				count.getAndIncrement();
 				TcpClientServer clientServer = new TcpClientServer(socket, protocol, this);
 				executor.execute(clientServer);
 			} catch(SocketTimeoutException e) {

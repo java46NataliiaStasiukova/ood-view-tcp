@@ -25,7 +25,7 @@ public class TcpClientServer implements Runnable {
 	}
 	@Override
 	public void run() {
-		TcpServer.count.decrementAndGet();
+		tcpServer.count.decrementAndGet();
 		while(!tcpServer.isShutdown) {
 			try {
 				Request request = (Request) input.readObject();
@@ -34,7 +34,7 @@ public class TcpClientServer implements Runnable {
 				output.writeObject(response);
 			} catch (SocketTimeoutException e) {
 				idlePeriod += READ_TIME_OUT;
-				if(idlePeriod >= CLIENT_IDLE_TIMEOUT && TcpServer.count.get() > 0) {
+				if(idlePeriod >= CLIENT_IDLE_TIMEOUT && tcpServer.count.get() > tcpServer.nThreads) {
 					try {
 						socket.close();
 					} catch (IOException e1) {
