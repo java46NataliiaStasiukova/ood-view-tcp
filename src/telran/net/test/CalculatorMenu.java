@@ -1,10 +1,7 @@
 package telran.net.test;
 
-import telran.view.ConsoleInputOutput;
 import telran.view.InputOutput;
 import telran.view.Item;
-import telran.view.Menu;
-import telran.view.test.CalculatorTest;
 
 public class CalculatorMenu {
 private static Calculator calculator;

@@ -12,6 +12,7 @@ public class CalculatorServerAppl {
 					new CalculatorProtocol(new CalculatorImpl()), 2);
 			Thread thread = new Thread(server);
 			thread.start();
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			while(true) {
 				System.out.println("For server shutdown enter type 'exit' ");

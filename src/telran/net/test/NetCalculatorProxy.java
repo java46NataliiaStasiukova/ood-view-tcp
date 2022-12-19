@@ -2,7 +2,6 @@ package telran.net.test;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.Serializable;
 
 import telran.net.NetworkHandler;
 
